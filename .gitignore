@@ -80,3 +80,5 @@ test.tsx
 dummy/
 
 debug.keystore
+
+.bundle
