@@ -1,79 +1,75 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Core Functionality
 
-# Getting Started
+-   **Authentication Screen**
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+    -   Signup Collect appropriate user details such as name, email, gender, age, username, and password. Store these details in local storage for persistence.
+    -   Login Use email and password for user login. Validate login credentials aginst those stored in local storage.
+    -   On successful login, navigate to the Dashboard.
+    -   Ensure proper validation for both sign-up and login forms.
 
-## Step 1: Start the Metro Server
+-   **Dashboard Screen**
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+    -   Display a summary of upcoming events and total attendees.
+    -   Handle data using local storage.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+-   **Add/Edit Event Screen**
 
-```bash
-# using npm
-npm start
+    -   Create a form for adding and editing events.
+    -   Ensure form validations for required fields (e.g., title, date).
+    -   Save event data in local storage.
 
-# OR using Yarn
-yarn start
-```
+-   **Event List Screen**
 
-## Step 2: Start your Application
+    -   Show a list of upcoming events with options to edit or delete events.
+    -   Implement filtering and search functionality.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+-   **Attendee Management Screen**
 
-### For Android
+    -   Add, edit, and remove attendees for each event.
+    -   Ensure attendee count doesn't exceed the event limit.
 
-```bash
-# using npm
-npm run android
+-   **Profile Screen**
 
-# OR using Yarn
-yarn android
-```
+    -   Create a profile screen and Include a Settings button inside the profile screen that navigates to the Settings Screen.
+    -   Include a Logout button in the profile screen, which clears the user session and navigates back to the Authentication Screen.
 
-### For iOS
+-   **Settings Screen**
 
-```bash
-# using npm
-npm run ios
+    -   Provide options to reset data, customize event filters, and choose date/time formats.
 
-# OR using Yarn
-yarn ios
-```
+-   **Bottom Tabs**
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+    -   Implement bottom tab navigation to switch between Dashboard, Event List, Profile, and other key screens.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+<br/>
+<br/>
+<br/>
 
-## Step 3: Modifying your App
+# How To Do?
 
-Now that you have successfully run the app, let's modify it.
+-   **Auth screen Implementation**
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+    -   To handle multile user login create a storage key of `loginedUserId` so when a user login this id must be filled with that uer id
+    -   If user logout then clear that id
+    -   Handle routes accordingly - If `loginedUserId` is present then go to dashboard else go to Auth screen
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+-   **Add step indicator in event list date**
 
-## Congratulations! :tada:
+    -   Passed date events steps should be in filled colored
+    -   Current date events step should be in outlined color
+    -   Upcoming events date should be in grey color
+    -   Current date should be shown in event list event it no events are there
 
-You've successfully run and modified your React Native App. :partying_face:
+-   **Two events cannot have same venue at same time**
 
-### Now what?
+<br/>
+<br/>
+<br/>
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+# Optional Functionality
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+-   **Forgot Password Screen**
+-   **Avatar in user profile**
+-   **Add App logo**
+-   **Add splash screen**
+-   **Add an admin account which can change venue**
