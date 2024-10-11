@@ -1,4 +1,5 @@
-import { GestureResponderEvent, StyleProp, TextInputProps } from "react-native";
+import { ReactNode } from "react";
+import { GestureResponderEvent, TouchableOpacityProps, StyleProp, TextInputProps } from "react-native";
 
 declare global {
 	type TextFieldProps = {
@@ -44,5 +45,49 @@ declare global {
 		onPress: (ev?: GestureResponderEvent) => void;
 		onPressIn?: (ev?: GestureResponderEvent) => void;
 		onPressOut?: (ev?: GestureResponderEvent) => void;
+	};
+
+	type GestureDetectorProps = {
+		children?: ReactNode | string;
+		isDisabled?: boolean;
+		isLoading?: boolean;
+		addOns?: TouchableOpacityProps;
+		styles?: StyleProp;
+	};
+
+	type LoaderAnims =
+		| "BallPulse"
+		| "BallGridPulse"
+		| "BallClipRotate"
+		| "SquareSpin"
+		| "BallClipRotatePulse"
+		| "BallClipRotateMultiple"
+		| "BallPulseRise"
+		| "BallRotate"
+		| "CubeTransition"
+		| "BallZigZag"
+		| "BallZigZagDeflect"
+		| "BallTrianglePath"
+		| "BallScale"
+		| "LineScale"
+		| "LineScaleParty"
+		| "BallScaleMultiple"
+		| "BallPulseSync"
+		| "BallBeat"
+		| "LineScalePulseOut"
+		| "LineScalePulseOutRapid"
+		| "BallScaleRipple"
+		| "BallScaleRippleMultiple"
+		| "BallSpinFadeLoader"
+		| "LineSpinFadeLoader"
+		| "TriangleSkewSpin"
+		| "Pacman"
+		| "BallGridBeat"
+		| "SemiCircleSpin";
+
+	type LoaderPorops = {
+		animName: LoaderAnims;
+		size: number;
+		color?: string;
 	};
 }

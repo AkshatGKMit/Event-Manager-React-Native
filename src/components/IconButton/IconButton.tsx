@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
-import Icon from "../Icon";
+import { Pressable } from "react-native";
+import Icon from "@components/Icon";
 
 const IconButton = ({ icon: { family, name, color, size }, onPress, onPressIn, onPressOut }: IconBtnProps) => {
 	return (

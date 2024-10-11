@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
-import styles from "./styles";
 import Icon from "@components/Icon";
-import { Colors } from "@src/constants/constants";
-import IconButton from "../IconButton/IconButton";
+import { Colors } from "@constants/constants";
+import IconButton from "@components/IconButton";
+import styles from "./styles";
 
 const TextField = ({
 	value,

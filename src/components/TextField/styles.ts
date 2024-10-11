@@ -1,5 +1,5 @@
-import { Colors } from "@src/constants/constants";
 import { StyleSheet } from "react-native";
+import { Colors } from "@constants/constants";
 
 const styles = StyleSheet.create({
 	textfieldWrapper: {
