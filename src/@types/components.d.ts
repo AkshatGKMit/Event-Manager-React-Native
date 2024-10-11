@@ -1,6 +1,19 @@
 import { GestureResponderEvent, StyleProp, TextInputProps } from "react-native";
 
 declare global {
+	type TextFieldProps = {
+		placeholder: string;
+		value: string;
+		onChangeText: (text: string) => void;
+		label?: string;
+		prefixIcon?: IconProps;
+		suffixIcon?: IconProps;
+		suffixIconButton?: IconBtnProps;
+		isPassword?: boolean;
+		styles?: StyleProp;
+		errorMsg?: string;
+		addOns?: TextInputProps;
+	};
 
 	type IconFamily =
 		| "AntDesign"
