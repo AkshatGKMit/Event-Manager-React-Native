@@ -73,3 +73,4 @@
 -   **Add App logo**
 -   **Add splash screen**
 -   **Add an admin account which can change venue**
+-   **Push notification when user added in an event**
