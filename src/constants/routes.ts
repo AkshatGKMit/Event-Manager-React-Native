@@ -2,5 +2,7 @@ export const ROUTES = {
   LOGIN: "Login",
   SIGNUP: "SignUp",
   MAIN: "Main",
-  HOME: "Home",
+  DASHBOARD: "Dashboard",
+  EVENTLIST: "EventList",
+  PROFILE: "Profile",
 } as const;

@@ -10,6 +10,7 @@ export const Colors = {
   accent800: "#0838c5",
   accent900: "#0d359b",
   accent950: "#0e225d",
+  black: "#000",
   grey: "#989898",
   placeholderColor: "#99999999",
   redError: "#ca0000",

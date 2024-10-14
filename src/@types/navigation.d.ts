@@ -9,7 +9,9 @@ declare global {
   };
 
   type BottomTabsParamList = {
-    Home: {
+    Dashboard: undefined;
+    EventList: undefined;
+    Profile: {
       replace: (screen: keyof AuthStackParamList) => void;
     };
   };
@@ -18,7 +20,9 @@ declare global {
   type SignUpScreenParamList = NativeStackScreenProps<AuthStackParamList, "SignUp">;
   type MainScreenParamList = NativeStackScreenProps<AuthStackParamList, "Main">;
 
-  type HomeScreenParamList = BottomTabScreenProps<BottomTabsParamList, "Home">;
+  type DashboardScreenParamList = BottomTabScreenProps<BottomTabsParamList, "Dashboard">;
+  type EventListScreenParamList = BottomTabScreenProps<BottomTabsParamList, "EventList">;
+  type ProfileScreenParamList = BottomTabScreenProps<BottomTabsParamList, "Profile">;
 }
 
 export {};

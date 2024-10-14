@@ -3,7 +3,7 @@ import { View, Text, ActivityIndicator, StyleSheet, Button } from "react-native"
 import AsyncStorageManager from "@storage/AsyncStorageManager";
 import styles from "./styles";
 
-const Home = ({ route }: HomeScreenParamList) => {
+const Profile = ({ route }: ProfileScreenParamList) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const storageManager = AsyncStorageManager.getInstance();
@@ -63,4 +63,4 @@ const Home = ({ route }: HomeScreenParamList) => {
   );
 };
 
-export default Home;
+export default Profile;
