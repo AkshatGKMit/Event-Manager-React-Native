@@ -18,7 +18,6 @@ const SignUp = ({ navigation: { replace } }: SignUpScreenParamList) => {
       const newId = uuid.v1().toString();
       const dataWithId: User = { ...data, id: newId };
       storageManager.addUser(dataWithId);
-      setData(initialSignUpData);
       (async function () {
         await storageManager.saveLoginUserId(newId);
         replace("Main");

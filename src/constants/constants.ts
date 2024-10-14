@@ -57,7 +57,7 @@ export const signUpValidations = {
     },
     max: {
       value: 75,
-      message: "Maximm Age must be 75",
+      message: "Maximum Age must be 75",
     },
   },
   username: {
