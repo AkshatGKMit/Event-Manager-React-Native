@@ -5,6 +5,7 @@ import Dashboard from "@src/screens/Dashboard/Dashboard";
 import EventList from "@src/screens/EventList/EventList";
 import Icon from "@src/components/Icon";
 import { Colors } from "@src/constants/constants";
+import EventListNavigator from "./EventListNavigator";
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
@@ -28,8 +29,8 @@ const BottomTabNavigator = ({ navigation: { replace } }: MainScreenParamList) =>
         }}
       />
       <Tab.Screen
-        name={ROUTES.EVENTLIST}
-        component={EventList}
+        name={ROUTES.MAINEVENTLIST}
+        component={EventListNavigator}
         options={{
           headerShown: false,
           title: "Event List",
