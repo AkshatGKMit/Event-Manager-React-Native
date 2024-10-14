@@ -16,6 +16,9 @@ declare global {
     placeholder: string;
     value: string;
     onChangeText: (text: string) => void;
+    textType?: "name" | "emailAddress" | "username";
+    keyboardType?: "number-pad" | "email-address" | "default" | "numeric";
+    inputMode?: "decimal" | "numeric" | "email" | "text";
     label?: string;
     prefixIcon?: IconProps;
     suffixIcon?: IconProps;
@@ -53,6 +56,7 @@ declare global {
   type IconBtnProps = {
     icon: IconProps;
     onPress: (ev?: GestureResponderEvent) => void;
+    styles?: StyleProp;
     onPressIn?: (ev?: GestureResponderEvent) => void;
     onPressOut?: (ev?: GestureResponderEvent) => void;
   };

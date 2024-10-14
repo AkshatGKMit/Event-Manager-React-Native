@@ -4,14 +4,19 @@ import { Colors } from "@constants/constants";
 const styles = StyleSheet.create({
   textfieldWrapper: {
     flexDirection: "column",
+    height: 50,
   },
   label: {
-    color: Colors.grey,
-    fontWeight: "700",
-    fontSize: 16,
+    position: "absolute",
+    backgroundColor: Colors.white,
+    left: 22,
+    top: -8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
   },
   textfield: {
-    borderBottomWidth: 2,
+    borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: 7,
@@ -26,6 +31,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     fontSize: 16,
+    color: "black",
   },
   error: {
     marginTop: 3,

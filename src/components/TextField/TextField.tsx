@@ -17,25 +17,35 @@ const TextField = ({
   addOns,
   suffixIconButton,
   isPassword,
+  inputMode,
+  keyboardType,
+  textType,
 }: TextFieldProps) => {
   const textInputRef = useRef<TextInput>(null);
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  const renderLabel = () => {
+    if (value) {
+      return <Text style={[styles.label, isFocus && styles.focused, errorMsg && styles.errorLabel]}>{label}</Text>;
+    }
+    return null;
+  };
 
   const handleFocus = () => {
     textInputRef.current?.focus();
-    setIsFocused(true);
+    setIsFocus(true);
   };
 
   const handleBlur = () => {
-    setIsFocused(false);
+    setIsFocus(false);
   };
 
   const getColor = (isPlaceHolder = false) => {
     if (errorMsg) return isPlaceHolder ? Colors.placeholderError : Colors.redError;
-    return isFocused
+    return isFocus
       ? isPlaceHolder
-        ? Colors.accent600
+        ? `${Colors.accent700}60`
         : Colors.accent700
       : isPlaceHolder
       ? Colors.placeholderColor
@@ -49,8 +59,8 @@ const TextField = ({
   return (
     <TouchableWithoutFeedback onPress={handleFocus}>
       <View style={styles.textfieldWrapper}>
-        {label && <Text style={[styles.label, isFocused && styles.focused, errorMsg && styles.errorLabel]}>{label}</Text>}
-        <View style={[styles.textfield, isFocused && styles.focused, errorMsg && styles.errorTextfield]}>
+        {renderLabel()}
+        <View style={[styles.textfield, isFocus && styles.focused, errorMsg && styles.errorTextfield]}>
           {prefixIcon && (
             <Icon
               family={prefixIcon.family}
@@ -61,13 +71,17 @@ const TextField = ({
           )}
           <TextInput
             ref={textInputRef}
+            textContentType={textType ?? "name"}
+            keyboardType={keyboardType ?? "default"}
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
+            inputMode={inputMode ?? "text"}
+            autoComplete="off"
             placeholderTextColor={getColor(true)}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            secureTextEntry={!passwordVisibility}
+            secureTextEntry={isPassword && !passwordVisibility}
             style={[styles.textInput, customStyle]}
             {...addOns}
           />
