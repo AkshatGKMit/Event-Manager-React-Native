@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textDecorationLine: "underline",
   },
+  isDisabled: {
+    color: `${Colors.grey}44`,
+  },
 });
 
 export default styles;

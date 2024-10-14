@@ -10,8 +10,15 @@ export const Colors = {
   accent800: "#0838c5",
   accent900: "#0d359b",
   accent950: "#0e225d",
+  black: "#000",
+  white: "#fff",
   grey: "#989898",
+  darkGrey: "#A9A9A9",
   placeholderColor: "#99999999",
   redError: "#ca0000",
   placeholderError: "#ca000099",
+};
+
+export const isString = (value: any): boolean => {
+  return typeof value === "string";
 };

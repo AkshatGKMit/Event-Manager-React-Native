@@ -1,5 +1,5 @@
 import { Colors } from "@src/constants/constants";
-import { StyleSheet } from "react-native";
+import { StyleProp, StyleSheet, TextStyle } from "react-native";
 
 const styles = StyleSheet.create({
   view: {
@@ -18,7 +18,16 @@ const styles = StyleSheet.create({
     bottom: -5,
   },
   itemLabel: {
-    color: "grey",
+    color: Colors.grey,
+    fontWeight: "normal",
+  },
+  selected: {
+    borderColor: Colors.accent700,
+    color: Colors.accent700,
+  },
+  selectedLabel: {
+    color: Colors.accent700,
+    fontWeight: "900",
   },
 });
 

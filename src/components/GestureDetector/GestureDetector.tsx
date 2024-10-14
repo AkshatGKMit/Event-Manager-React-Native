@@ -1,46 +1,27 @@
-import { useState } from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Loader from "@components/Loader";
-import { Colors } from "@constants/constants";
+import { isString } from "@constants/constants";
 import styles from "./styles";
 
-const GestureDetector = ({ children, addOns, isDisabled, isLoading, styles: customStyles }: GestureDetectorProps) => {
-  const [btnScaleNOpacity, setBtnScaleNOpacity] = useState({
-    opacity: 1,
-    scale: 0,
-  });
-
-  const handlePressIn = () => setBtnScaleNOpacity({ opacity: 0.75, scale: 2 });
-
-  const handlePressOut = () => setBtnScaleNOpacity({ opacity: 1, scale: 0 });
-
+const GestureDetector = ({
+  children,
+  addOns,
+  isDisabled = false,
+  isLoading = false,
+  styles: customStyles,
+  onPress,
+}: GestureDetectorProps) => {
   return (
-    <TouchableWithoutFeedback
-      onPressIn={!isDisabled || !isLoading ? handlePressIn : undefined}
-      onPressOut={!isDisabled || !isLoading ? handlePressOut : undefined}
-      style={[
-        styles.button,
-        customStyles,
-        {
-          opacity: btnScaleNOpacity.opacity,
-          margin: btnScaleNOpacity.scale,
-          backgroundColor: isDisabled ? Colors.grey : styles.button.backgroundColor,
-        },
-      ]}
+    <TouchableOpacity
+      onPress={isLoading ? undefined : onPress}
       disabled={isDisabled || isLoading}
+      activeOpacity={0.75}
       {...addOns}
     >
-      {isLoading ? (
-        <Loader
-          animName="BallSpinFadeLoader"
-          size={20}
-        />
-      ) : typeof children === "string" ? (
-        <Text style={styles.text}>{children}</Text>
-      ) : (
-        children
-      )}
-    </TouchableWithoutFeedback>
+      <View style={[styles.button, customStyles]}>
+        {isLoading ? <Loader size={20} /> : isString(children) ? <Text style={styles.text}>{children}</Text> : children}
+      </View>
+    </TouchableOpacity>
   );
 };
 

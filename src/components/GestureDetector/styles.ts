@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
+    shadowColor: Colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   text: {
-    color: "white",
+    color: Colors.white,
     fontSize: 16,
     fontWeight: "600",
   },

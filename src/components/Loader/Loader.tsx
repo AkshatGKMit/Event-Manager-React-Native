@@ -1,11 +1,12 @@
-import LoaderKit from "react-native-loader-kit";
+import { ActivityIndicator } from "react-native";
 
-const Loader = ({ animName, color, size }: LoaderProps) => {
+const Loader = ({ color, size, addons, styles: customStyle }: LoaderProps) => {
   return (
-    <LoaderKit
-      style={{ width: size, height: size }}
-      name={animName}
+    <ActivityIndicator
+      style={customStyle}
+      size={size}
       color={color}
+      {...addons}
     />
   );
 };

@@ -1,7 +1,17 @@
 import { ReactNode } from "react";
-import { GestureResponderEvent, TouchableOpacityProps, StyleProp, TextInputProps } from "react-native";
+import {
+  GestureResponderEvent,
+  TouchableOpacityProps,
+  StyleProp,
+  TextInputProps,
+  ActivityIndicatorProps,
+} from "react-native";
 
 declare global {
+  type StringLiteral = "string";
+  type NumberLiteral = number;
+  type BooleanLiteral = boolean;
+
   type TextFieldProps = {
     placeholder: string;
     value: string;
@@ -48,7 +58,8 @@ declare global {
   };
 
   type GestureDetectorProps = {
-    children?: ReactNode | string;
+    children: ReactNode | StringLiteral;
+    onPress: () => void;
     isDisabled?: boolean;
     isLoading?: boolean;
     addOns?: TouchableOpacityProps;
@@ -64,40 +75,11 @@ declare global {
     textColor?: string;
   };
 
-  type LoaderAnim =
-    | "BallPulse"
-    | "BallGridPulse"
-    | "BallClipRotate"
-    | "SquareSpin"
-    | "BallClipRotatePulse"
-    | "BallClipRotateMultiple"
-    | "BallPulseRise"
-    | "BallRotate"
-    | "CubeTransition"
-    | "BallZigZag"
-    | "BallZigZagDeflect"
-    | "BallTrianglePath"
-    | "BallScale"
-    | "LineScale"
-    | "LineScaleParty"
-    | "BallScaleMultiple"
-    | "BallPulseSync"
-    | "BallBeat"
-    | "LineScalePulseOut"
-    | "LineScalePulseOutRapid"
-    | "BallScaleRipple"
-    | "BallScaleRippleMultiple"
-    | "BallSpinFadeLoader"
-    | "LineSpinFadeLoader"
-    | "TriangleSkewSpin"
-    | "Pacman"
-    | "BallGridBeat"
-    | "SemiCircleSpin";
-
   type LoaderProps = {
-    animName: LoaderAnim;
-    size: number;
+    size?: number | "small" | "large";
     color?: string;
+    styles?: StyleProp;
+    addons?: ActivityIndicatorProps;
   };
 
   type RadioItemProp = {
