@@ -43,6 +43,8 @@ declare global {
     initialData: Partial<T>;
     validations?: Validations<T>;
   };
+
+  type OnLoginTextChangeKeyType = "usernameOrEmail" | "password";
 }
 
 export {};
