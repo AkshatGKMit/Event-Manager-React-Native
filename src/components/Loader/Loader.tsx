@@ -1,4 +1,3 @@
-import React from "react";
 import LoaderKit from "react-native-loader-kit";
 
 const Loader = ({ animName, color, size }: LoaderProps) => {
