@@ -28,7 +28,7 @@ export const initialSignUpData: User = {
   password: "",
 };
 
-export const signUpValidations = {
+export const signUpValidations: Partial<Record<keyof User, Validation>> = {
   name: {
     required: "This field is required",
     minLength: {
@@ -86,6 +86,35 @@ export const signUpValidations = {
     pattern: {
       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       message: "Must include at least one uppercase letter, one lowercase letter, one number, and one special character",
+    },
+  },
+};
+
+const minDateTime = new Date(Date.now() + 5 * 60 * 1000).toISOString().slice(0, 16);
+
+export const initialEventData: MainEvent = {
+  attendeeLimit: 1,
+  attendees: [],
+  description: "",
+  startDateTime: new Date(),
+  endDateTime: new Date(),
+  id: "",
+  title: "",
+  venue: "Admin Room",
+};
+
+export const eventValidations: Partial<Record<keyof MainEvent, Validation>> = {
+  attendeeLimit: {
+    required: "At least one attendee should be present",
+  },
+  description: {
+    minLength: { value: 10, message: "Minimum 10 characters required" },
+  },
+  startDateTime: {
+    required: "Select date and time",
+    minTime: {
+      value: 5,
+      message: "Event date must be at least 5 minutes from now.",
     },
   },
 };

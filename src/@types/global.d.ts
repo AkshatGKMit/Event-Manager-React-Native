@@ -13,6 +13,27 @@ declare global {
 
   type Users = User[];
 
+  interface MainEvent {
+    id: string;
+    title: string;
+    startDateTime: Date;
+    endDateTime: Date;
+    description: string;
+    attendeeLimit: string;
+    venue: Venue;
+    attendees: Attendees;
+  }
+
+  type Venue =
+    | "Decision Dome"
+    | "Strategy Sphere"
+    | "Idea Incubator"
+    | "Think Tank"
+    | "Hr Room"
+    | "Js Room"
+    | "Admin Room"
+    | "Escape Room";
+
   type StorageKey = "Users" | "LoginUserId";
 
   type Options = {
@@ -28,10 +49,7 @@ declare global {
     max?: Options;
     maxLength?: Options;
     pattern?: Options;
-    custom?: {
-      isValid: (value: string) => boolean;
-      message: string;
-    };
+    minTime?: Options;
   }
 
   type ErrorRecord<T> = Partial<Record<keyof T, string>>;

@@ -3,12 +3,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    height: "100%",
+    justifyContent: "space-evenly",
+    backgroundColor: "white",
+    paddingHorizontal: 20,
   },
-  text: {
-    fontSize: 24,
-    fontWeight: "900",
+  inputWrapper: {
+    gap: 15,
   },
 });
 
