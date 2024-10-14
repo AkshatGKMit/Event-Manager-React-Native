@@ -4,15 +4,15 @@ import RadioGroup, { RadioButtonProps as RadioProp } from "react-native-radio-bu
 import styles from "./styles";
 
 const RadioButton = ({ buttons, changeChecked, layout, heading }: RadioButtonProps) => {
-  const [selectedId, setSelectedId] = useState<string>(buttons?.[0].label);
+  const [selectedId, setSelectedId] = useState<string>(buttons?.[0]?.label);
   const [radioProps, setRadioProps] = useState<RadioProp[]>([]);
 
   useEffect(() => {
-    setRadioProps(_ =>
+    setRadioProps(() =>
       buttons.map<RadioProp>(({ id, label, value }: RadioItemProp) => {
         const isSelected = selectedId === id;
 
-        const radio: RadioProp = {
+        return {
           id,
           label,
           value,
@@ -22,15 +22,14 @@ const RadioButton = ({ buttons, changeChecked, layout, heading }: RadioButtonPro
           borderSize: 2,
           size: 20,
           selected: isSelected,
-          onPress(id: string) {
+          onPress: (id: string) => {
             changeChecked(id);
             setSelectedId(id);
           },
         };
-        return radio;
       }),
     );
-  }, []);
+  }, [buttons, selectedId]);
 
   return (
     <View style={styles.view}>
