@@ -20,7 +20,7 @@ module.exports = {
           "@contexts": "./src/contexts",
           "@navigation": "./src/navigation",
           "@storage": "./src/storage",
-				},
+        },
       },
     ],
   ],
