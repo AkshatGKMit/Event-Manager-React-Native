@@ -19,8 +19,6 @@ export const Colors = {
   placeholderError: "#ca000099",
 };
 
-export const isString = (value: any): boolean => typeof value === "string";
-
 export const initialSignUpData: User = {
   id: "",
   age: "",
@@ -91,4 +89,7 @@ export const signUpValidations = {
       message: "Must include at least one uppercase letter, one lowercase letter, one number, and one special character",
     },
   },
+
+export const isString = (value: any): boolean => {
+  return typeof value === "string";
 };
