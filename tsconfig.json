@@ -16,6 +16,7 @@
       "@screens/*": ["src/screens/*"],
       "@network/*": ["src/network/*"],
       "@storage/*": ["src/storage/*"],
+      "@styles/*": ["src/styles/*"],
       "@theme/*": ["src/theme/*"],
       "@utility/*": ["src/utility/*"]
     }
