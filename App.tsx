@@ -1,10 +1,14 @@
-import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import Navigator from "@navigation/Navigator";
+import globalStyles from "@styles/global";
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <Text>Event Manager</Text>
+    <SafeAreaView style={globalStyles.safeAreaView}>
+      <NavigationContainer>
+        <Navigator />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };
