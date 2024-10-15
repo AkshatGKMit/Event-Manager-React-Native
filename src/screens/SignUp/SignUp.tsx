@@ -3,27 +3,29 @@ import { View, Text, Image } from "react-native";
 import uuid from "react-native-uuid";
 import { useForm } from "@hooks/useForm";
 import AsyncStorageManager from "@storage/AsyncStorageManager";
+import { SignInBackground as SignUpBackground } from "@src/assets/images";
 import TextField from "@components/TextField";
 import RadioButton from "@components/RadioButton";
 import GestureDetector from "@components/GestureDetector";
 import TextButton from "@components/TextButton";
 import { initialSignUpData as initialSignUpData, signUpValidations } from "@constants/constants";
 import styles from "./styles";
-import { SignInBackground as SignUpBackground } from "@src/assets/images";
 
 const SignUp = ({ navigation: { replace } }: SignUpScreenParamList) => {
-  const { data, errors, handleChangeText, handleSubmit, setData, isLoadingOnSubmit } = useForm<User>({
+  const handleOnSubmit = () => {
+    const newId = uuid.v1().toString();
+    const dataWithId: User = { ...data, id: newId };
+    storageManager.addUser(dataWithId);
+    (async function () {
+      await storageManager.saveLoginUserId(newId);
+      replace("Home");
+    })();
+  };
+
+  const { data, errors, handleChangeText, handleSubmit, isLoadingOnSubmit } = useForm<User>({
     initialData: initialSignUpData,
     validations: signUpValidations,
-    onSubmit: () => {
-      const newId = uuid.v1().toString();
-      const dataWithId: User = { ...data, id: newId };
-      storageManager.addUser(dataWithId);
-      (async function () {
-        await storageManager.saveLoginUserId(newId);
-        replace("Home");
-      })();
-    },
+    onSubmit: handleOnSubmit,
   });
 
   const storageManager = AsyncStorageManager.getInstance();
