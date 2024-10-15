@@ -1,4 +1,5 @@
 import { Colors } from "@constants/constants";
+import globalStyles from "@src/styles/global";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -9,9 +10,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    ...globalStyles.flexCenter,
   },
   heading: {
     fontSize: 24,

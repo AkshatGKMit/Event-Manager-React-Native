@@ -22,6 +22,7 @@ const Login = ({ navigation: { replace } }: LoginScreenParamList) => {
 
   const handleOnChange = (key: "usernameOrEmail" | "password", text: string) => {
     setLoginError("");
+
     if (key === "usernameOrEmail") {
       setUsernameOrEmail(text);
       setUsernameOrEmailError("");

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, Button } from "react-native";
+import { View, Text, Button } from "react-native";
 import AsyncStorageManager from "@storage/AsyncStorageManager";
+import Loader from "@components/Loader";
+import { Colors } from "@constants/constants";
 import styles from "./styles";
 
 const Home = ({ navigation: { replace } }: HomeScreenParamList) => {
@@ -29,21 +31,13 @@ const Home = ({ navigation: { replace } }: HomeScreenParamList) => {
     replace("Login");
   };
 
-  if (loading) {
+  if (loading || !user) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator
+        <Loader
           size="large"
-          color="#0000ff"
+          color={Colors.accent700}
         />
-      </View>
-    );
-  }
-
-  if (!user) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.errorText}>No user found. Please log in again.</Text>
       </View>
     );
   }
