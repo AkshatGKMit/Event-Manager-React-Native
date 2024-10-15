@@ -3,7 +3,7 @@ import { View, Text, Image } from "react-native";
 import uuid from "react-native-uuid";
 import { useForm } from "@hooks/useForm";
 import AsyncStorageManager from "@storage/AsyncStorageManager";
-import { SignInBackground as SignUpBackground } from "@src/assets/images";
+import { SignUpBackground } from "@assets/images";
 import TextField from "@components/TextField";
 import RadioButton from "@components/RadioButton";
 import GestureDetector from "@components/GestureDetector";
