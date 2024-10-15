@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     fontSize: 16,
-    color: "black",
+    color: Colors.black,
   },
   error: {
     marginTop: 3,

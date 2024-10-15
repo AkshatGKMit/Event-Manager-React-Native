@@ -9,7 +9,7 @@ const TextButton = ({ text, addOns, isDisabled = false, styles: customStyles, on
       {...addOns}
     >
       <View>
-        <Text style={[styles.text, customStyles, isDisabled && styles.isDisabled]}>{text}</Text>
+        <Text style={[styles.text, customStyles, isDisabled ? styles.isDisabled : undefined]}>{text}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
