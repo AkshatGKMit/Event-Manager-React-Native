@@ -5,7 +5,9 @@ export const ROUTES = {
   DASHBOARD: "Dashboard",
   MAINEVENTLIST: "MainEventList",
   EVENTLIST: "EventList",
-  PROFILE: "Profile",
+  MAINPROFILE: "MainProfile",
   ADDEDITEVENT: "AddEditEvent",
   EVENTDETAILS: "EventDetails",
+  PROFILE: "Profile",
+  SETTINGS: "Settings",
 } as const;
