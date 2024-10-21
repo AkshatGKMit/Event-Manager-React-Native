@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { Text, TouchableWithoutFeedback, View } from "react-native";
-import React, { useState } from "react";
 import Loader from "@components/Loader";
 import { Colors } from "@constants/constants";
 import styles from "./styles";
@@ -35,21 +35,21 @@ const GestureDetector = ({
 
   return (
     <TouchableWithoutFeedback
-      onPress={isDisabled || isLoading ? undefined : onPress}
-      onPressIn={isDisabled || isLoading ? undefined : handlePressIn}
-      onPressOut={isDisabled || isLoading ? undefined : handlePressOut}
+      onPress={isLoading ? undefined : onPress}
+      onPressIn={isLoading ? undefined : handlePressIn}
+      onPressOut={isLoading ? undefined : handlePressOut}
       disabled={isDisabled || isLoading}
     >
       <View
         style={[
           styles.button,
-          customStyles,
           {
             opacity: btnScaleNOpacity.opacity,
             padding: btnScaleNOpacity.marginScale,
             backgroundColor: isDisabled ? Colors.grey : styles.button.backgroundColor,
             marginHorizontal: btnScaleNOpacity.marginScale,
           },
+          customStyles,
         ]}
       >
         {isLoading ? (
