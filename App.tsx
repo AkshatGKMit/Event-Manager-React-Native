@@ -1,11 +1,28 @@
-import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { useEffect } from "react";
+import { Appearance, SafeAreaView, StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { SettingsContextProvider } from "@contexts/SettingsContext";
+import Navigator from "@navigation/Navigator";
+import { Colors } from "@constants/constants";
 
 const App = () => {
+  useEffect(() => {
+    Appearance.setColorScheme("light");
+  }, []);
+
   return (
-    <SafeAreaView>
-      <Text>Event Manager</Text>
-    </SafeAreaView>
+    <SettingsContextProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar
+          animated
+          backgroundColor={Colors.accent700}
+          barStyle="light-content"
+        />
+        <NavigationContainer>
+          <Navigator />
+        </NavigationContainer>
+      </SafeAreaView>
+    </SettingsContextProvider>
   );
 };
 
