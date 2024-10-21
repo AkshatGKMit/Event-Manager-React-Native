@@ -9,11 +9,45 @@ declare global {
     age: string;
     username: string;
     password: string;
+    image?: string;
   }
 
   type Users = User[];
 
-  type StorageKey = "Users" | "LoginUserId";
+  interface MainEvent {
+    id: string;
+    title: string;
+    startDateTime: Date;
+    endDateTime: Date;
+    description: string;
+    attendeeLimit: string;
+    venue: Venue;
+    attendeeIds: string[];
+  }
+
+  type MainEvents = MainEvent[];
+
+  interface Attendee {
+    id: string;
+    name: string;
+    email: string;
+  }
+
+  type Attendees = Attendee[];
+
+  type Venue =
+    | "Decision Dome"
+    | "Strategy Sphere"
+    | "Idea Incubator"
+    | "Think Tank"
+    | "Hr Room"
+    | "Js Room"
+    | "Admin Room"
+    | "Escape Room";
+
+  type Venues = Venue[];
+
+  type StorageKey = "Users" | "LoginUserId" | "Events" | "Attendees" | "Settings";
 
   type Options = {
     value: number | string | RegExp;
@@ -28,10 +62,7 @@ declare global {
     max?: Options;
     maxLength?: Options;
     pattern?: Options;
-    custom?: {
-      isValid: (value: string) => boolean;
-      message: string;
-    };
+    minTime?: Options;
   }
 
   type ErrorRecord<T> = Partial<Record<keyof T, string>>;
