@@ -1,3 +1,4 @@
+import { Colors } from "@src/constants/constants";
 import React from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -16,33 +17,33 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import Zocial from "react-native-vector-icons/Zocial";
 
 const iconFamilies = {
-	AntDesign,
-	Entypo,
-	EvilIcons,
-	Feather,
-	FontAwesome,
-	FontAwesome5,
-	FontAwesome6,
-	Fontisto,
-	Foundation,
-	Ionicons,
-	MaterialCommunityIcons,
-	MaterialIcons,
-	Octicons,
-	SimpleLineIcons,
-	Zocial,
+  AntDesign,
+  Entypo,
+  EvilIcons,
+  Feather,
+  FontAwesome,
+  FontAwesome5,
+  FontAwesome6,
+  Fontisto,
+  Foundation,
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Octicons,
+  SimpleLineIcons,
+  Zocial,
 };
 
 const Icon = ({ family, name, color, size }: IconProps) => {
-	const SelectedIcon = iconFamilies[family];
+  const SelectedIcon = iconFamilies[family];
 
-	return SelectedIcon ? (
-		<SelectedIcon
-			name={name}
-			size={size}
-			color={color}
-		/>
-	) : null;
+  return SelectedIcon ? (
+    <SelectedIcon
+      name={name}
+      size={size}
+      color={color ?? Colors.black}
+    />
+  ) : null;
 };
 
 export default Icon;

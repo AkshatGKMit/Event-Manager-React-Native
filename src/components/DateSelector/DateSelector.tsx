@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import DatePicker from "react-native-date-picker";
+import Icon from "@components/Icon";
+import globalStyles from "@styles/global";
 import textFieldStyles from "@components/TextField/styles";
 import styles from "./styles";
-import Icon from "../Icon";
-import globalStyles from "@src/styles/global";
 
 const DateSelector = ({ title, date, setDate, mode, open, setOpen, errorMsg, minDate }: DateSelectorProps) => {
   return (
