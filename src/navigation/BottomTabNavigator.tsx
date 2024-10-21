@@ -1,22 +1,24 @@
+import { StyleSheet, Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ROUTES } from "@constants/routes";
-import { Profile } from "@screens/index";
-import Dashboard from "@src/screens/Dashboard/Dashboard";
-import EventList from "@src/screens/EventList/EventList";
-import Icon from "@src/components/Icon";
-import { Colors } from "@src/constants/constants";
 import EventListNavigator from "./EventListNavigator";
+import ProfileNavigator from "./ProfileNavigator";
+import Header from "@components/Header/Header";
+import Dashboard from "@screens/Dashboard/Dashboard";
+import Icon from "@components/Icon";
+import { ROUTES } from "@constants/routes";
+import { Colors } from "@constants/constants";
+import globalStyles from "@styles/global";
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
-const BottomTabNavigator = ({ navigation: { replace } }: MainScreenParamList) => {
+const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true }}>
       <Tab.Screen
         name={ROUTES.DASHBOARD}
         component={Dashboard}
         options={{
-          headerShown: false,
+          header: () => <Header text="Dashboard" />,
           title: "Dashboard",
           tabBarIcon: ({ focused }) => (
             <Icon
@@ -25,6 +27,9 @@ const BottomTabNavigator = ({ navigation: { replace } }: MainScreenParamList) =>
               size={24}
               color={focused ? Colors.accent700 : Colors.black}
             />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text style={[globalStyles.tabBarLabel, { color: focused ? Colors.accent700 : Colors.black }]}>Dashboard</Text>
           ),
         }}
       />
@@ -42,11 +47,14 @@ const BottomTabNavigator = ({ navigation: { replace } }: MainScreenParamList) =>
               color={focused ? Colors.accent700 : Colors.black}
             />
           ),
+          tabBarLabel: ({ focused }) => (
+            <Text style={[globalStyles.tabBarLabel, { color: focused ? Colors.accent700 : Colors.black }]}>Event List</Text>
+          ),
         }}
       />
       <Tab.Screen
-        name={ROUTES.PROFILE}
-        component={Profile}
+        name={ROUTES.MAINPROFILE}
+        component={ProfileNavigator}
         options={{
           headerShown: false,
           title: "Profile",
@@ -58,8 +66,10 @@ const BottomTabNavigator = ({ navigation: { replace } }: MainScreenParamList) =>
               color={focused ? Colors.accent700 : Colors.black}
             />
           ),
+          tabBarLabel: ({ focused }) => (
+            <Text style={[globalStyles.tabBarLabel, { color: focused ? Colors.accent700 : Colors.black }]}>Profile</Text>
+          ),
         }}
-        initialParams={{ replace }}
       />
     </Tab.Navigator>
   );

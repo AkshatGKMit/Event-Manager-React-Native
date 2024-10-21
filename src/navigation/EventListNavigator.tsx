@@ -1,22 +1,48 @@
+import { useLayoutEffect } from "react";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ROUTES } from "@src/constants/routes";
-import AddEditEvent from "@src/screens/AddEditEvent/AddEditEvent";
-import EventList from "@src/screens/EventList/EventList";
+import Header from "@components/Header/Header";
+import AddEditEvent from "@screens/AddEditEvent/AddEditEvent";
+import EventDetails from "@screens/EventDetails/EventDetails";
+import EventList from "@screens/EventList/EventList";
+import { ROUTES } from "@constants/routes";
 
 const EventStack = createNativeStackNavigator<EventStackParamList>();
 
-const EventListNavigator = () => {
+const EventListNavigator = ({ navigation, route }: MainEventScreenParamList) => {
+  useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route) ?? ROUTES.EVENTLIST;
+    navigation.setOptions({
+      tabBarStyle: { display: routeName === ROUTES.EVENTLIST ? "flex" : "none" },
+    });
+  }, [navigation, route]);
+
   return (
     <EventStack.Navigator>
       <EventStack.Screen
+        options={{
+          header: () => <Header text="Event List" />,
+        }}
         name={ROUTES.EVENTLIST}
         component={EventList}
-        options={{ headerShown: false, navigationBarHidden: true }}
       />
       <EventStack.Screen
+        options={{ headerShown: false }}
         name={ROUTES.ADDEDITEVENT}
         component={AddEditEvent}
-        options={{ header: () => <></> }}
+      />
+      <EventStack.Screen
+        options={{
+          header: ({ navigation: { goBack } }) => (
+            <Header
+              back={goBack}
+              text="Event Details"
+              isLeft
+            />
+          ),
+        }}
+        name={ROUTES.EVENTDETAILS}
+        component={EventDetails}
       />
     </EventStack.Navigator>
   );

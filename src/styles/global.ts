@@ -22,6 +22,9 @@ const globalStyles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
   },
+  tabBarLabel: {
+    fontSize: 12,
+  },
 });
 
 export default globalStyles;
