@@ -1,16 +1,19 @@
-import { useState } from "react";
-import { View, Text } from "react-native";
+import { useContext, useState } from "react";
+import { View, Text, Image, KeyboardAvoidingView, ScrollView, Dimensions, Platform } from "react-native";
 import uuid from "react-native-uuid";
 import { useForm } from "@hooks/useForm";
 import AsyncStorageManager from "@storage/AsyncStorageManager";
+import SettingsContext from "@contexts/SettingsContext";
 import TextField from "@components/TextField";
 import RadioButton from "@components/RadioButton";
 import GestureDetector from "@components/GestureDetector";
 import TextButton from "@components/TextButton";
 import { initialSignUpData as initialSignUpData, signUpValidations } from "@constants/constants";
+import { SignUpBackground } from "@assets/images";
+import globalStyles from "@styles/global";
 import styles from "./styles";
 
-const SignUp = ({ navigation: { replace } }: SignUpScreenParamList) => {
+const SignUp = ({ navigation: { goBack } }: SignUpScreenParamList) => {
   const { data, errors, handleChangeText, handleSubmit, setData, isLoadingOnSubmit } = useForm<User>({
     initialData: initialSignUpData,
     validations: signUpValidations,
@@ -20,12 +23,14 @@ const SignUp = ({ navigation: { replace } }: SignUpScreenParamList) => {
       storageManager.addUser(dataWithId);
       (async function () {
         await storageManager.saveLoginUserId(newId);
-        replace("Main");
+        goBack();
       })();
     },
   });
 
   const storageManager = AsyncStorageManager.getInstance();
+
+  const { login } = useContext(SettingsContext);
 
   const [isUsernameUnique, setIsUsernameUnique] = useState(false);
   const [isUsernameUniqueError, setIsUsernameUniqueError] = useState("");
@@ -103,85 +108,106 @@ const SignUp = ({ navigation: { replace } }: SignUpScreenParamList) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Text style={styles.heading}>Create a new account in PlanIt</Text>
-      <View style={styles.inputWrapper}>
-        <TextField
-          label="Name"
-          placeholder="Enter name"
-          prefixIcon={{ family: "Fontisto", name: "person" }}
-          onChangeText={(text: string) => handleChangeText("name", text)}
-          errorMsg={errors.name}
-          value={data.name}
-          addOns={{ autoFocus: true }}
-        />
-        <TextField
-          label="Email"
-          placeholder="example@company.com"
-          textType="emailAddress"
-          inputMode="email"
-          prefixIcon={{ family: "MaterialCommunityIcons", name: "email" }}
-          onChangeText={(text: string) => handleChangeText("email", text)}
-          errorMsg={!isEmailUnique ? isEmailUniqueError : errors.email}
-          value={data.email}
-        />
-        <TextField
-          label="Age"
-          placeholder="Enter age"
-          keyboardType="numeric"
-          inputMode="numeric"
-          prefixIcon={{ family: "Octicons", name: "number" }}
-          onChangeText={(text: string) => handleChangeText("age", text)}
-          errorMsg={errors.age}
-          value={data.age?.toString()}
-        />
-        <RadioButton
-          heading="Gender:"
-          buttons={[
-            { id: "Male", label: "Male", value: "Male" },
-            { id: "Female", label: "Female", value: "Female" },
-          ]}
-          changeChecked={handleChangeGender}
-          layout="row"
-        />
-        <TextField
-          label="Username"
-          placeholder="Enter Username"
-          keyboardType="default"
-          prefixIcon={{ family: "FontAwesome5", name: "user-circle" }}
-          onChangeText={(text: string) => handleChangeText("username", text)}
-          errorMsg={!isUsernameUnique ? isUsernameUniqueError : errors.username}
-          value={data.username}
-        />
-        <TextField
-          label="Password"
-          placeholder="Enter Password"
-          prefixIcon={{ family: "MaterialIcons", name: "password" }}
-          isPassword
-          errorMsg={errors.password}
-          onChangeText={(text: string) => handleChangeText("password", text)}
-          value={data.password}
-        />
-        <TextField
-          label="Confirm Password"
-          placeholder="Confirm Password"
-          prefixIcon={{ family: "MaterialIcons", name: "password" }}
-          isPassword
-          value={confirmPassword}
-          onChangeText={handleConfirmPassword}
-          errorMsg={confirmPasswordError}
-        />
-        <GestureDetector
-          children="SignUp"
-          onPress={submitVerification}
-          isLoading={isLoadingOnSubmit}
-        />
-      </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.screen}
+    >
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        {Dimensions.get("screen").height > 860 ? (
+          <Image
+            source={SignUpBackground}
+            style={styles.image}
+          />
+        ) : (
+          <></>
+        )}
+        <View style={[styles.signUp, globalStyles.screen]}>
+          <Text style={styles.heading}>Sign-Up</Text>
+          <View style={styles.inputWrapper}>
+            <TextField
+              label="Name"
+              placeholder="Enter name"
+              prefixIcon={{ family: "Fontisto", name: "person" }}
+              onChangeText={(text: string) => handleChangeText("name", text)}
+              errorMsg={errors.name}
+              value={data.name}
+            />
+            <TextField
+              label="Email Address"
+              placeholder="Enter email address"
+              textType="emailAddress"
+              keyboardType="email-address"
+              inputMode="email"
+              prefixIcon={{ family: "Entypo", name: "email" }}
+              onChangeText={(text: string) => handleChangeText("email", text)}
+              errorMsg={!isEmailUnique ? isEmailUniqueError : errors.email}
+              value={data.email}
+            />
+            <TextField
+              label="Age"
+              placeholder="Enter age"
+              keyboardType="numeric"
+              inputMode="numeric"
+              prefixIcon={{ family: "MaterialIcons", name: "numbers" }}
+              onChangeText={(text: string) => handleChangeText("age", text)}
+              errorMsg={errors.age}
+              value={data.age?.toString()}
+            />
+            <RadioButton
+              heading="Gender"
+              buttons={[
+                { id: "Male", label: "Male", value: "Male" },
+                { id: "Female", label: "Female", value: "Female" },
+              ]}
+              changeChecked={handleChangeGender}
+              layout="row"
+            />
+            <TextField
+              label="Username"
+              placeholder="Enter Username"
+              keyboardType="default"
+              prefixIcon={{ family: "FontAwesome5", name: "user-circle" }}
+              onChangeText={(text: string) => handleChangeText("username", text)}
+              errorMsg={!isUsernameUnique ? isUsernameUniqueError : errors.username}
+              value={data.username}
+            />
+            <TextField
+              label="Password"
+              placeholder="Enter Password"
+              prefixIcon={{ family: "MaterialIcons", name: "password" }}
+              isPassword
+              errorMsg={errors.password}
+              onChangeText={(text: string) => handleChangeText("password", text)}
+              value={data.password}
+            />
+            <TextField
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              prefixIcon={{ family: "MaterialIcons", name: "password" }}
+              isPassword
+              value={confirmPassword}
+              onChangeText={handleConfirmPassword}
+              errorMsg={confirmPasswordError}
+            />
+            <GestureDetector
+              children="SignUp"
+              onPress={submitVerification}
+              isLoading={isLoadingOnSubmit}
+              styles={styles.submit}
+            />
+          </View>
+        </View>
+      </ScrollView>
       <TextButton
-        text="Go to Login screen"
-        onPress={() => replace("Login")}
+        text="Already have an account?"
+        link="Login"
+        onPress={goBack}
+        styles={styles.textButton}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

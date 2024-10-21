@@ -1,13 +1,19 @@
-import { useState } from "react";
-import { Button, Text, View, Alert } from "react-native";
+import { useContext, useState } from "react";
+import { Text, View, Image, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import AsyncStorageManager from "@storage/AsyncStorageManager";
+import SettingsContext from "@contexts/SettingsContext";
 import TextField from "@components/TextField";
 import GestureDetector from "@components/GestureDetector";
-import textFieldStyles from "@src/components/TextField/styles";
+import textFieldStyles from "@components/TextField/styles";
+import TextButton from "@components/TextButton";
+import { LoginBackground } from "@assets/images";
+import globalStyles from "@styles/global";
 import styles from "./styles";
 
-const Login = ({ navigation: { replace } }: LoginScreenParamList) => {
+const Login = ({ navigation: { navigate } }: LoginScreenParamList) => {
   const storageManager = AsyncStorageManager.getInstance();
+
+  const { login } = useContext(SettingsContext);
 
   const [loginError, setLoginError] = useState("");
 
@@ -57,44 +63,63 @@ const Login = ({ navigation: { replace } }: LoginScreenParamList) => {
 
     if (user) {
       await storageManager.saveLoginUserId(user.id);
-      replace("Main");
+      login(user.id);
     } else {
       setLoginError("Invalid username/email or password.");
     }
   };
 
   return (
-    <View style={styles.screen}>
-      <Text style={styles.heading}>Login to PlanIt</Text>
-      <View style={styles.inputWrapper}>
-        <Text style={textFieldStyles.error}>{loginError}</Text>
-        <TextField
-          placeholder="example@company.com"
-          label="Email"
-          prefixIcon={{ family: "MaterialCommunityIcons", name: "email" }}
-          value={usernameOrEmail}
-          onChangeText={text => handleOnChange("usernameOrEmail", text)}
-          errorMsg={usernameOrEmailError}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[globalStyles.screen, styles.screen]}
+    >
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <Image
+          source={LoginBackground}
+          style={styles.image}
         />
-        <TextField
-          placeholder="Enter Password"
-          label="Password"
-          prefixIcon={{ family: "MaterialIcons", name: "lock" }}
-          isPassword
-          value={password}
-          onChangeText={text => handleOnChange("password", text)}
-          errorMsg={passwordError}
-        />
-        <GestureDetector
-          children="Login"
-          onPress={handleLogin}
-        />
-      </View>
-      <Button
-        title="Go to SignUp screen"
-        onPress={() => replace("SignUp")}
+        <View style={styles.loginScreen}>
+          <View style={styles.loginWrapper}>
+            <Text style={styles.heading}>Login</Text>
+            <View style={styles.inputWrapper}>
+              <Text style={textFieldStyles.error}>{loginError}</Text>
+              <TextField
+                placeholder="Enter Username or Email"
+                label="Username/Email"
+                prefixIcon={{ family: "Entypo", name: "email" }}
+                value={usernameOrEmail}
+                onChangeText={(text: string) => handleOnChange("usernameOrEmail", text)}
+                errorMsg={usernameOrEmailError}
+              />
+              <TextField
+                placeholder="Enter Password"
+                label="Password"
+                prefixIcon={{ family: "MaterialIcons", name: "lock" }}
+                isPassword
+                value={password}
+                onChangeText={(text: string) => handleOnChange("password", text)}
+                errorMsg={passwordError}
+              />
+              <GestureDetector
+                children="Login"
+                onPress={handleLogin}
+                styles={styles.submit}
+              />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+      <TextButton
+        text="Didn't have an account?"
+        link="Sign Up"
+        onPress={() => navigate("SignUp")}
+        styles={styles.textButton}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
